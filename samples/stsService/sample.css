@@ -1,0 +1,23 @@
+body {
+   padding: 0 40px;
+}
+
+header {
+   padding-right: 80px;
+}
+
+input[type='text'], input[type='password'] {
+   width: 320px;
+}
+
+.container {
+   position: relative;
+}
+
+.session {
+   margin-bottom: 40px;
+}
+
+.content {
+   min-height: 40px;
+}

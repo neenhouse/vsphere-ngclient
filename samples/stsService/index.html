@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>vSphere SDK for JavaScript</title>
+<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="sample.css" rel="stylesheet">
+<script src="node_modules/es6-shim/es6-shim.min.js"></script>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="vsphere.js"></script>
+<script src="sample.js"></script>
+</head>
+<body>
+   <div class="container">
+      <header class="page-header clearfix">
+         <h1>vSphere SDK for JavaScript</h1>
+      </header>
+      <div class="alert alert-danger hide"></div>
+      <form class="session">
+         <div class="form-group">
+            <input name="hostname" type="text" size="48"
+               class="form-control" placeholder="Service Hostname">
+         </div>
+         <div class="form-group">
+            <input name="username" type="text" size="16"
+               class="form-control" placeholder="Username">
+         </div>
+         <div class="form-group">
+            <input name="password" type="password" size="16"
+               class="form-control" placeholder="Password">
+         </div>
+         <div>
+            <input name="submit" type="submit" class="btn btn-primary"
+               value="Issue SAML Token">
+         </div>
+      </form>
+      <div class="content"></div>
+   </div>
+</body>
+</html>

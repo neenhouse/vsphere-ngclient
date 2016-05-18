@@ -1,0 +1,47 @@
+.servers md-icon {
+    width: 50%;
+    height: 50%;
+}
+.servers md-icon svg {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+.servers .s64 {
+    font-size: 64px;
+}
+.servers .s32 {
+    font-size: 48px;
+}
+.servers md-icon.fa {
+    display: block;
+    padding-left: 0;
+}
+.servers md-icon.s32 span {
+    padding-left: 8px;
+}
+.servers md-grid-list {
+    margin: 8px;
+}
+.servers .deepBlue {
+    background: #448aff;
+}
+.servers md-grid-tile {
+    transition: all 300ms ease-out 50ms;
+}
+.servers md-grid-tile md-icon {
+    padding-bottom: 32px;
+}
+.servers md-grid-tile md-grid-tile-footer {
+    background: rgba(0, 0, 0, 0.68);
+    height: 36px;
+}
+.servers md-grid-tile-footer figcaption {
+    width: 100%;
+}
+.servers md-grid-tile-footer figcaption h3 {
+    margin: 0;
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+}

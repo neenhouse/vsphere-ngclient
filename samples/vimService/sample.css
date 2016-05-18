@@ -1,0 +1,26 @@
+body {
+   padding: 0 40px;
+}
+
+header {
+   padding-right: 80px;
+}
+
+input[type='text'], input[type='password'] {
+   width: 320px;
+}
+
+input[value='Logout'] {
+   position: absolute;
+   top: 40px;
+   right: 15px;
+   margin: 1.6em 0 0;
+}
+
+.container {
+   position: relative;
+}
+
+.content {
+   min-height: 40px;
+}
