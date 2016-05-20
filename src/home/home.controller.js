@@ -1,16 +1,3 @@
-function getServersMock(){
-  var servers = [];
-  for(var i=0; i<11; i++){
-      servers.push({
-        row:1,
-        col:1,
-        name:'Server #' + i,
-        background:'deepBlue'
-      });
-  }
-  return servers;
-}
-
 class HomeController {
 
     /**
@@ -18,9 +5,20 @@ class HomeController {
      *
      * @param {object} $scope
      */
-    constructor($scope) {
+    constructor($scope, Vsphere) {
         'ngInject';
-        $scope.servers = getServersMock();
+        $scope.servers = null;
+        Vsphere.on('data', (servers) => {
+          $scope.servers = servers.map(function(server){
+            return {
+              ...server,
+              row:1,
+              col:1,
+              background:'deepBlue'
+            }
+          });
+          $scope.$apply();
+        });
     }
 }
 

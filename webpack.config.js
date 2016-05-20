@@ -1,10 +1,12 @@
 var path = require('path'),
+    fs = require('fs'),
     webpack = require("webpack"),
     libPath = path.join(__dirname, 'src'),
     wwwPath = path.join(__dirname, 'www'),
     pkg = require('./package.json'),
     HtmlWebpackPlugin = require('html-webpack-plugin');
 
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
 var config = {
     entry: path.join(libPath, 'index.js'),
@@ -50,7 +52,23 @@ var config = {
 
         // Deduplication: find duplicate dependencies & prevents duplicate inclusion : https://github.com/webpack/docs/wiki/optimization#deduplication
         new webpack.optimize.DedupePlugin()
-    ]
+    ],
+    node: {
+      fs: 'empty',
+      'child_process': 'empty'
+    },
+    devServer:{
+      inline:true,
+      https:true,
+      open:true,
+      proxy: {
+        '/*': {
+          target: 'https://172.16.62.128',
+          secure: false,
+          autoRewrite:true
+        }
+      }
+    }
 };
 
 module.exports = config;
