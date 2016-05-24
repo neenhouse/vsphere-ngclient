@@ -7,8 +7,13 @@
     </div>
     <md-grid-list ng-if="servers.length > 0" md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="8px" md-gutter-gt-sm="4px">
         <md-grid-tile ng-repeat="server in servers" md-rowspan="{{server.row}}" md-colspan="{{server.col}}" md-colspan-sm="1" ng-class="server.background">
+            <md-grid-tile-body>
+              <md-switch ng-click="togglePower(server)" ng-model='server.runtime.powerState' ng-false-value="'poweredOff'" ng-true-value="'poweredOn'" role="checkbox"></md-switch>
+              <h5>{{server.runtime.powerState}}</h5>
+            </md-grid-tile-body>
             <md-grid-tile-footer>
-                <h3>{{server.name}}</h3>
+                <h3>{{server.config.name}}</h3>
+                <h4>{{server.config.guestFullName}}</h4>
             </md-grid-tile-footer>
         </md-grid-tile>
     </md-grid-list>

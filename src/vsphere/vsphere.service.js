@@ -37,15 +37,15 @@ class VsphereService extends EventEmitter {
       return Vsphere.vimService(this.connection.host, { proxy:true })
         .then((vimService) => {
            this.service = vimService;
-           // If logged in, logout
-           if (this.cookie !== undefined && this.service !== undefined) {
-              this.service.vimPort.logout(this.service.serviceContent.sessionManager).
-                then(() => {
-                   this.login();
-                });
+           if(getCookie('hostname')){
+             vimService.vimPort.logout(this.service.serviceContent.sessionManager).
+               then(() => {
+                  this.login();
+               });
            } else {
              this.login();
            }
+
         }, function(err) {
            alert(err.message);
         });
@@ -64,14 +64,14 @@ class VsphereService extends EventEmitter {
       var propertyCollector = this.service.serviceContent.propertyCollector;
       var rootFolder = this.service.serviceContent.rootFolder;
       var viewManager = this.service.serviceContent.viewManager;
-      var type = "ManagedEntity";
+      var type = "VirtualMachine";
       return this.service.vimPort.createContainerView(viewManager, rootFolder,
             [type], true).then((containerView) => {
+
                return this.service.vimPort.retrievePropertiesEx(propertyCollector, [
                   this.service.vim.PropertyFilterSpec({
                      objectSet : this.service.vim.ObjectSpec({
                         obj: containerView,
-                        skip: true,
                         selectSet: this.service.vim.TraversalSpec({
                            path: "view",
                            type: "ContainerView"
@@ -79,21 +79,25 @@ class VsphereService extends EventEmitter {
                      }),
                      propSet: this.service.vim.PropertySpec({
                         type: type,
-                        pathSet: ["name"]
+                        pathSet: ["summary"]
                      })
                   })
                ], this.service.vim.RetrieveOptions());
             }).then((result) => {
               // filter results
               var filtered = result.objects.filter(function(r){ return r.obj.type === 'VirtualMachine'; });
-              console.log(filtered);
               filtered = filtered.map(function(item){
-                return {
-                  name:item.propSet[0].val
-                };
+                return item.propSet[0].val;
               });
               this.emit('data', filtered);
             });
+    }
+    togglePower(server){
+      if(server.runtime.powerState === 'poweredOff'){
+        this.service.vimPort.powerOnVMTask(server.vm);
+      } else {
+        this.service.vimPort.powerOffVMTask(server.vm);
+      }
     }
 }
 

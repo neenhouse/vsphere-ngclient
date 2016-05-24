@@ -8,6 +8,9 @@ class HomeController {
     constructor($scope, Vsphere) {
         'ngInject';
         $scope.servers = null;
+        $scope.togglePower = function(server){
+          Vsphere.togglePower(server);
+        }
         Vsphere.on('data', (servers) => {
           $scope.servers = servers.map(function(server){
             return {
